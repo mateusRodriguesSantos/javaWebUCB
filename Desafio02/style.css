@@ -1,0 +1,56 @@
+.div1{
+    width: 100%;
+    height: 50vh;
+    background-color: green;
+    margin: auto;
+}
+
+.div1 h1{
+    text-align: center;
+    padding-top: 22vh;
+}
+
+.div2{
+    width: 100%;
+    height: 5vh;
+    background: blue;
+    margin: auto;
+}
+
+.div2 h2{
+    text-align: center;
+    color: white;
+}
+
+.div3{
+    width: 100%;
+    height: 40vh;
+    background: red;
+    margin: auto;
+}
+
+.div3 h3{
+    text-align: center;
+}
+
+
+@media screen and (min-width: 768px){
+    .div1{
+        width: 100%;
+        height: 50vh;
+    }
+
+    .div2{
+        margin-top: 3vh;
+        width: 30%;
+        height: 150vh;
+        float: left;
+    }
+    
+    .div3{
+        margin-top: 3vh;
+        width: 68%;
+        height: 150vh;
+        float: right;
+    }
+}
