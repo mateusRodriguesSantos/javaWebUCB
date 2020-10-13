@@ -27,7 +27,7 @@ public class AnuncianteDAO {
      * This method registry an anunciante in data base
      * 
      * @param newAnunciante this first paramenter for insert anunciante in data base
-     * @return boolean that indicates status of the operation
+     * @return boolean that indicates status of the operation - true or false
      * @throws SQLException
      */
     public boolean insertAnunciante(AnuncianteBean newAnunciante) throws SQLException {
@@ -89,16 +89,48 @@ public class AnuncianteDAO {
         return anunciantes;
     }
 
+    // Read AnuncianteBean
+    /**
+     * This method read an anunciante in data base
+     * 
+     * @return AnuncianteBean object
+     * @throws SQLException
+     */
+    public AnuncianteBean readAnunciante(int idAnunciante) throws SQLException {
+        AnuncianteBean anunciante = null;
+        // Create connection
+        Connect con = new Connect();
+        java.sql.Connection session = con.getConexaoMySQL();
+
+        String sql = "SELECT * FROM Anunciante WHERE idAnunciante = ? ";
+        PreparedStatement statement = session.prepareStatement(sql);
+
+        // Insert attributes
+        statement.setString(1,""+idAnunciante);
+        ResultSet result = statement.executeQuery();
+
+        //Output
+        
+        while (result.next()) {
+            anunciante = new AnuncianteBean(result.getInt(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5));
+        }
+
+        con.FecharConexao();
+
+        return anunciante;
+    }
+
     // Update Anunciante
     /**
      * This method update an anunciante in data base
      * 
      * @param idAnunciante  this first paramenter for update anunciante in data base
      * @param newAnunciante this second paramenter for update anunciante in data
-     *                      base
+     * @return boolean that indicates status of the operation - true or false
      * @throws SQLException
      */
-    public void updateAnunciante(int idAnunciante, AnuncianteBean newAnunciante) throws SQLException {
+    public boolean updateAnunciante(int idAnunciante, AnuncianteBean newAnunciante) throws SQLException {
+        boolean result = false;
         // Create connection
         Connect con = new Connect();
         java.sql.Connection session = con.getConexaoMySQL();
@@ -110,21 +142,26 @@ public class AnuncianteDAO {
         statement.setString(2, newAnunciante.getTelefone());
         statement.setString(3, newAnunciante.getEmail());
         statement.setString(4, newAnunciante.getSenha());
+        statement.setString(5, ""+idAnunciante);
 
         int rowsUpdated = statement.executeUpdate();
         if (rowsUpdated > 0) {
             System.out.println("An existing Anunciante was updated successfully!");
+            result = true;
         }
         con.FecharConexao();
+        return result;
     }
 
     // Drop Anunciante
     /**
      * This method drop an anunciante in data base
      * 
+     * @return boolean that indicates status of the operation - true or false 
      * @throws SQLException
      */
-    public void dropAnunciante(int idAnunciante) throws SQLException {
+    public boolean dropAnunciante(int idAnunciante) throws SQLException {
+        boolean result = false;
         // Create connection
         Connect con = new Connect();
         java.sql.Connection session = con.getConexaoMySQL();
@@ -137,9 +174,12 @@ public class AnuncianteDAO {
         int rowsDeleted = statement.executeUpdate();
         if (rowsDeleted > 0) {
             System.out.println("A user was deleted successfully!");
+            result = true;
         }
 
         con.FecharConexao();
+
+        return result;
     }
 
 }

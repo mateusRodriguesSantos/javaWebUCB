@@ -6,15 +6,31 @@ public class ImovelBean {
     private AnuncianteBean anunciante;
     private String disponibilidade;
     private String tipo;
-    private int area;
+    private Double area;
     private int quartos;
     private int banheiros;
     private int vagas;
     private String descricao;
 
-    //Constructors
-    public ImovelBean(int idImovel, EnderecoBean endereco, AnuncianteBean anunciante, String disponibilidade,
-            String tipo, int area, int quartos, int banheiros, int vagas, String descricao) {
+    // Constructors
+
+    public ImovelBean() {
+
+    }
+
+    public ImovelBean(String disponibilidade,
+            String tipo, Double area, int quartos, int banheiros, int vagas, String descricao) {
+        this.disponibilidade = disponibilidade;
+        this.tipo = tipo;
+        this.area = area;
+        this.quartos = quartos;
+        this.banheiros = banheiros;
+        this.vagas = vagas;
+        this.descricao = descricao;
+    }
+
+    public ImovelBean(int idImovel, String disponibilidade,
+            String tipo, Double area, int quartos, int vagas,int banheiros, String descricao,EnderecoBean endereco, AnuncianteBean anunciante) {
         this.idImovel = idImovel;
         this.endereco = endereco;
         this.anunciante = anunciante;
@@ -27,7 +43,7 @@ public class ImovelBean {
         this.descricao = descricao;
     }
 
-    //Getters And Setters
+    // Getters And Setters
     public int getIdImovel() {
         return idImovel;
     }
@@ -68,11 +84,11 @@ public class ImovelBean {
         this.tipo = tipo;
     }
 
-    public int getArea() {
+    public Double getArea() {
         return area;
     }
 
-    public void setArea(int area) {
+    public void setArea(Double area) {
         this.area = area;
     }
 
