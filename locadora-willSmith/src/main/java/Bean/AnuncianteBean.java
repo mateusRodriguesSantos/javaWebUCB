@@ -1,21 +1,35 @@
 package Bean;
 
 public class AnuncianteBean {
-     //Variables
-     private int idAnunciante;
-     private int telefone;
-     private String email;
-     private int senha;
- 
-     //Constructors
-     public AnuncianteBean(int idAnunciante, int telefone, String email, int senha) {
-         this.idAnunciante = idAnunciante;
-         this.telefone = telefone;
-         this.email = email;
-         this.senha = senha;
-     }
- 
-     //Getters And Setters
+    // Variables
+    private int idAnunciante;
+    private String nome;
+    private String telefone;
+    private String email;
+    private String senha;
+
+    // Constructors
+    public AnuncianteBean(){
+
+    }
+    
+    public AnuncianteBean(int idAnunciante,String nome, String telefone, String email, String senha) {
+        this.nome = nome;
+        this.idAnunciante = idAnunciante;
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    // Getters And Setters
      public int getIdAnunciante() {
          return idAnunciante;
      }
@@ -24,11 +38,11 @@ public class AnuncianteBean {
          this.idAnunciante = idAnunciante;
      }
  
-     public int getTelefone() {
+     public String getTelefone() {
          return telefone;
      }
  
-     public void setTelefone(int telefone) {
+     public void setTelefone(String telefone) {
          this.telefone = telefone;
      }
  
@@ -40,11 +54,11 @@ public class AnuncianteBean {
          this.email = email;
      }
  
-     public int getSenha() {
+     public String getSenha() {
          return senha;
      }
  
-     public void setSenha(int senha) {
+     public void setSenha(String senha) {
          this.senha = senha;
      }
 }

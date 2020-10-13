@@ -11,15 +11,27 @@ import java.sql.SQLException;
 
 import Enums.ConnectionEnums;
 
+/**
+ * Connect class, manage the connection with database
+ *
+ * @author Mateus Rodrigues
+ * @version 1.0
+ * @since 2020-10-10
+ */
 public class Connect {
 
+    /**
+     * Status indicate the status of connection with database
+     */
     public ConnectionEnums status;
-    
-    // Método de Conexão//
 
+    // Connection method
+    /**
+     * This method startes the connection with database
+     */
     public java.sql.Connection getConexaoMySQL() {
 
-        Connection connection = null;          //atributo do tipo Connection
+        Connection connection = null; // atributo do tipo Connection
 
         try {
 
@@ -29,62 +41,67 @@ public class Connect {
 
             Class.forName(driverName);
 
-
             // Configurando a nossa conexão com um banco de dados//
 
-                String serverName = "localhost";    //caminho do servidor do BD
+            String serverName = "localhost"; // caminho do servidor do BD
 
-                String mydatabase ="willSmithDatabase";        //nome do seu banco de dados
+            String mydatabase = "willSmithDatabase"; // nome do seu banco de dados
 
-                String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
+            String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
 
-                String username = "root";        //nome de um usuário de seu BD
+            String username = "root"; // nome de um usuário de seu BD
 
-                String password = "12345678";      //sua senha de acesso
+            String password = "12345678"; // sua senha de acesso
 
-                connection = DriverManager.getConnection(url, username, password);
+            connection = DriverManager.getConnection(url, username, password);
 
-                //Testa sua conexão//
+            // Testa sua conexão//
 
-                if (connection != null) {
+            if (connection != null) {
 
-                    status = ConnectionEnums.Conectado;
+                status = ConnectionEnums.Conectado;
 
-                } else {
+            } else {
 
-                    status = ConnectionEnums.ERRO;
+                status = ConnectionEnums.ERRO;
 
-                }
-                return connection;
+            }
+            return connection;
 
-            } catch (ClassNotFoundException e) {  //Driver não encontrado
+        } catch (ClassNotFoundException e) { // Driver não encontrado
 
+            System.out.println("O driver expecificado nao foi encontrado.");
 
+            return null;
 
-                System.out.println("O driver expecificado nao foi encontrado.");
+        } catch (SQLException e) {
 
-                return null;
+            // Não conseguindo se conectar ao banco
 
-            } catch (SQLException e) {
+            System.out.println("Nao foi possivel conectar ao Banco de Dados.");
 
-                //Não conseguindo se conectar ao banco
-
-                System.out.println("Nao foi possivel conectar ao Banco de Dados.");
-
-                return null;
+            return null;
 
         }
 
     }
 
-    //Método que retorna o status da sua conexão//
-
+    // Status conection method
+    /**
+     * This method returns the status of connection
+     * 
+     * @return status
+     */
     public ConnectionEnums statusConection() {
         return status;
     }
 
-    //Método que fecha sua conexão//
-
+    // Stop connection
+    /**
+     * This method stop the connection
+     * 
+     * @return boolean if connection closed with success returns true, false if connection closed with error
+     */
     public boolean FecharConexao() {
 
         try {
@@ -102,8 +119,12 @@ public class Connect {
         }
     }
 
-    //Método que reinicia sua conexão//
-
+    // Restart connection
+    /**
+     * This method restart the connection
+     * 
+     * @return java.sql.Connection the connection
+     */
     public java.sql.Connection ReiniciarConexao() {
 
         FecharConexao();
@@ -112,8 +133,10 @@ public class Connect {
 
     }
 
-    //Método Construtor da Classe//
-
+    // Constructor
+    /**
+     * The constructor
+     */
     public Connect() {
 
     }
